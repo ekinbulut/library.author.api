@@ -14,11 +14,11 @@ namespace Library.Author.Api.Controllers
     [ExcludeFromCodeCoverage]
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthorController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
         private readonly IAuthorService _authorService;
 
-        public AuthorController(IAuthorService authorService)
+        public AuthorsController(IAuthorService authorService)
         {
             _authorService = authorService;
         }

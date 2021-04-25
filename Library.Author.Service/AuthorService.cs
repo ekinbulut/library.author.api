@@ -31,8 +31,8 @@ namespace Library.Author.Service
             if (offset < 0)
                 throw new ValidationException("Offset value can not be less than 0");
 
-            if (limit > 25 || limit < 1)
-                throw new ValidationException("Limit can not be greater than 25 or less than 1");
+            if (limit > 25 || limit < 0)
+                throw new ValidationException("Limit can not be greater than 25 or less than 0");
 
             var authors = _authorRepository.SelectAll()?.Skip(offset).Take(limit);
             var total = _authorRepository.SelectAll()?.Count();
@@ -46,7 +46,11 @@ namespace Library.Author.Service
                     {
                         Id = t.Id, Name = t.Name, Data = new AuthorModelMetaData
                         {
-                            Birthday = t.Birthday, Bio = t.Bio, Dead = t.Dead, Books = t.Books, Location = t.Location,
+                            Birthday = t.Birthday, 
+                            Bio = t.Bio, 
+                            Dead = t.Dead, 
+                            Books = t.Books, 
+                            Location = t.Location,
                             ImageUrl = t.ImageUrl
                         }
                     }
@@ -116,7 +120,8 @@ namespace Library.Author.Service
 
             _authorRepository.Insert(new EAuthor
             {
-                Name = insertAuthorServiceRequest.Author.Name, Bio = insertAuthorServiceRequest.Author.Data.Bio,
+                Name = insertAuthorServiceRequest.Author.Name, 
+                Bio = insertAuthorServiceRequest.Author.Data.Bio,
                 Dead = insertAuthorServiceRequest.Author.Data.Dead,
                 Books = insertAuthorServiceRequest.Author.Data.Books,
                 Birthday = insertAuthorServiceRequest.Author.Data.Birthday,
